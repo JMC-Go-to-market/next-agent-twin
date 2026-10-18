@@ -1,0 +1,56 @@
+{
+  "name": "next-agent-twin",
+  "version": "0.1.0",
+  "description": "Markdown agent twins for Next.js App Router pages: .md routes, Accept negotiation, rel=alternate, and llms.txt.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "import": "./dist/next.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "check": "npm run lint && npm run typecheck && npm test"
+  },
+  "peerDependencies": {
+    "next": ">=15.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "nextjs",
+    "markdown",
+    "llms.txt",
+    "ai-agents",
+    "content-negotiation",
+    "seo"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "@types/node": "^24.19.2",
+    "next": "^16.4.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}
