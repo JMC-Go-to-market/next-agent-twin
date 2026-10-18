@@ -26,7 +26,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "test": "vitest run",
-    "check": "npm run lint && npm run typecheck && npm test"
+    "check": "npm run lint && npm run typecheck && npm test",
+    "secrets": "secretlint \"**/*\" --secretlintignore .gitignore"
   },
   "peerDependencies": {
     "next": ">=15.0.0"
@@ -46,10 +47,12 @@
   ],
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.7",
     "@types/node": "^24.19.2",
     "next": "^16.4.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "secretlint": "^13.0.7",
     "typescript": "^7.0.2",
     "vitest": "^5.0.5"
   }

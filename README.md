@@ -86,7 +86,7 @@ Next replaces a layout's `alternates` wholesale when a page exports its own. Pas
 ### 4. Negotiate in the proxy
 
 ```ts
-// proxy.ts (middleware.ts on Next 15)
+// proxy.ts (on Next 15: middleware.ts, exporting `middleware`)
 import type { NextRequest } from "next/server";
 import { twinProxy } from "next-agent-twin/next";
 import { twins } from "@/lib/twins";
@@ -99,7 +99,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: ["/((?!_next/|api/|.*\\.[\\w]+$).*)"],
-  // style "suffix": let .md through
+  // style "suffix": let .md through (checked as a regex, not yet in a running app)
   // matcher: ["/((?!_next/|api/|.*\\.(?!md$)[\\w]+$).*)"],
 };
 ```
@@ -178,7 +178,7 @@ Also exported:
 
 ## Example
 
-`examples/app-router` is a minimal App Router app: a twin route for `/` and `/about`, `llms.txt`, page metadata and the proxy. The test suite runs its route handlers and proxy.
+`examples/app-router` holds the App Router files for a small site (twin routes for `/` and `/about`, `llms.txt`, page metadata, the proxy). The test suite runs its route handlers and proxy as plain functions; it is not a standalone app with its own `package.json`.
 
 ## Develop
 
