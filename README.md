@@ -19,7 +19,7 @@ You supply the content. The package does not fetch data or convert HTML; each tw
 npm install next-agent-twin
 ```
 
-Requires Next.js 15 or later (`next` is a peer dependency). No runtime dependencies.
+Requires Next.js 16 or later (`next` is a peer dependency; the proxy adapter uses Next 16's `proxy.ts` convention). No runtime dependencies.
 
 ## Usage (App Router)
 
@@ -36,6 +36,8 @@ export const twins = defineTwins({
   noindex: false, // optional: X-Robots-Tag: noindex on twins
 });
 ```
+
+`noindex` is off by default. The twin's `Link: <page>; rel="canonical"` header and the page's `rel=alternate` link already tell crawlers which URL is the page and which is its Markdown copy, so the twin does not compete with it. Turn `noindex` on only if you want twins kept out of search indexes altogether.
 
 ### 2. Add a twin route next to each page
 
@@ -86,7 +88,7 @@ Next replaces a layout's `alternates` wholesale when a page exports its own. Pas
 ### 4. Negotiate in the proxy
 
 ```ts
-// proxy.ts (on Next 15: middleware.ts, exporting `middleware`)
+// proxy.ts
 import type { NextRequest } from "next/server";
 import { twinProxy } from "next-agent-twin/next";
 import { twins } from "@/lib/twins";
@@ -98,9 +100,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/|api/|.*\\.[\\w]+$).*)"],
-  // style "suffix": let .md through (checked as a regex, not yet in a running app)
-  // matcher: ["/((?!_next/|api/|.*\\.(?!md$)[\\w]+$).*)"],
+  // Page routes and .md twins: skip Next internals, API routes and other files with an extension.
+  matcher: ["/((?!_next/|api/|.*\\.(?!md$)[\\w]+$).*)"],
 };
 ```
 
@@ -108,7 +109,7 @@ export const config = {
 
 - rewrites a page request with `Accept: text/markdown` (q > 0) to the page's twin route;
 - in `"suffix"` style, rewrites `/about.md` to the `/about/index.md` route;
-- adds `Accept` to `Vary` on page responses, together with Next's router headers (`NEXT_ROUTER_VARY`). Some hosts let a proxy's `Vary` replace the one Next sets, so the default repeats them. Pass `{ vary: [...] }` to change the list.
+- adds `Accept` to `Vary` on page responses, together with Next's router headers (the exported `NEXT_ROUTER_VARY` constant, Next 16's names). Some hosts let a proxy's `Vary` replace the one Next sets, so the default repeats them. Pass `{ vary: [...] }` to change the list.
 
 ## llms.txt
 
@@ -178,7 +179,7 @@ Also exported:
 
 ## Example
 
-`examples/app-router` holds the App Router files for a small site (twin routes for `/` and `/about`, `llms.txt`, page metadata, the proxy). The test suite runs its route handlers and proxy as plain functions; it is not a standalone app with its own `package.json`.
+`examples/app-router` is a small Next 16 app: twin routes for `/`, `/about` and a dynamic `/docs/[slug]`, `llms.txt`, page metadata and the proxy. The unit tests run its route handlers and proxy as plain functions. `npm run smoke` packs the package, installs the tarball into the example, then runs `next build` and `next start` once per URL style and checks the twin URLs, Accept negotiation, the HTML `rel=alternate` link, `Vary`, the canonical `Link`, the 404 case and `llms.txt` over HTTP.
 
 ## Develop
 
@@ -186,6 +187,7 @@ Also exported:
 npm ci
 npm run check   # lint + typecheck + tests
 npm run build
+npm run smoke   # real Next build + start, both URL styles
 ```
 
 ## License

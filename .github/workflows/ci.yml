@@ -22,9 +22,12 @@ jobs:
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            examples/app-router/package-lock.json
       - run: npm ci
       - run: npm run secrets
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
-      - run: npm run build
+      - run: npm run smoke

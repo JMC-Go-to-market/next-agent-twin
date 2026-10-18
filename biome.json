@@ -1,7 +1,15 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["**", "!**/node_modules", "!**/dist", "!**/package-lock.json"]
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/package-lock.json",
+      "!**/.next",
+      "!**/.pack",
+      "!**/next-env.d.ts"
+    ]
   },
   "formatter": {
     "indentStyle": "space",
@@ -11,7 +19,9 @@
   "linter": {
     "rules": {
       "preset": "recommended",
-      "style": { "noNonNullAssertion": "off" }
+      "style": {
+        "noNonNullAssertion": "off"
+      }
     }
   }
 }

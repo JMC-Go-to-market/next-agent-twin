@@ -21,3 +21,15 @@ export const PAGES: Page[] = [
 ];
 
 export const pageAt = (path: string) => PAGES.find((p) => p.path === path) ?? null;
+
+export const DOCS: Page[] = [
+  {
+    path: "/docs/getting-started",
+    title: "Getting started",
+    description: "Install and first steps.",
+    body: "## Install\n\nRun the installer.\n\n## First steps\n\nOpen the app.",
+    updated: "2026-10-03",
+  },
+];
+
+export const docAt = (slug: string) => DOCS.find((d) => d.path === `/docs/${slug}`) ?? null;

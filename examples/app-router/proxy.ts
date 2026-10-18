@@ -6,8 +6,7 @@ export function proxy(request: NextRequest) {
   return twinProxy(twins, request);
 }
 
-// Page routes only: skip Next internals, API routes and files with an extension.
-// With style "suffix", let ".md" through as well: "/((?!_next/|api/|.*\\.(?!md$)[\\w]+$).*)".
+// Page routes and .md twins only: skip Next internals, API routes and other files with an extension.
 export const config = {
-  matcher: ["/((?!_next/|api/|.*\\.[\\w]+$).*)"],
+  matcher: ["/((?!_next/|api/|.*\\.(?!md$)[\\w]+$).*)"],
 };

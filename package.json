@@ -16,7 +16,9 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=20"
@@ -27,10 +29,11 @@
     "lint": "biome check .",
     "test": "vitest run",
     "check": "npm run lint && npm run typecheck && npm test",
-    "secrets": "secretlint \"**/*\" --secretlintignore .gitignore"
+    "secrets": "secretlint \"**/*\" --secretlintignore .gitignore",
+    "smoke": "bash examples/app-router/scripts/smoke.sh"
   },
   "peerDependencies": {
-    "next": ">=15.0.0"
+    "next": ">=16.0.0"
   },
   "peerDependenciesMeta": {
     "next": {
@@ -43,7 +46,9 @@
     "llms.txt",
     "ai-agents",
     "content-negotiation",
-    "seo"
+    "seo",
+    "agent-twin",
+    "app-router"
   ],
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
@@ -55,5 +60,14 @@
     "secretlint": "^13.0.7",
     "typescript": "^7.0.2",
     "vitest": "^5.0.5"
+  },
+  "author": "JMC Go-to-Market Systems",
+  "homepage": "https://github.com/JMC-Go-to-market/next-agent-twin#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JMC-Go-to-market/next-agent-twin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JMC-Go-to-market/next-agent-twin/issues"
   }
 }

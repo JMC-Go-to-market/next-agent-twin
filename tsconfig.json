@@ -16,5 +16,6 @@
       "next-agent-twin/next": ["./src/next.ts"]
     }
   },
-  "include": ["src", "test", "examples/**/*.ts", "vitest.config.ts"]
+  "include": ["src", "test", "examples/**/*.ts", "vitest.config.ts"],
+  "exclude": ["**/node_modules", "**/.next", "dist"]
 }

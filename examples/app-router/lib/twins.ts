@@ -2,6 +2,7 @@ import { defineTwins } from "next-agent-twin";
 
 export const twins = defineTwins({
   site: "https://example.com",
-  style: "index",
+  // The smoke test builds the app once per style; a real app picks one.
+  style: process.env.TWIN_STYLE === "suffix" ? "suffix" : "index",
   cacheControl: "public, max-age=3600, s-maxage=86400",
 });
