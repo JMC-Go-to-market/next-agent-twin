@@ -1,4 +1,4 @@
-import { buildLlmsTxt } from "next-agent-twin";
+import { buildLlmsTxt } from "@jmc-gtm/next-agent-twin";
 import { PAGES } from "../../content/pages";
 import { twins } from "../../lib/twins";
 

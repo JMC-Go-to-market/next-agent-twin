@@ -15,3 +15,13 @@ CI runs all three.
 ## Next.js versions
 
 `NEXT_ROUTER_VARY` in `src/next.ts` lists Next 16's App Router request headers. When Next changes them, update that constant and the peer range together.
+
+## Releasing
+
+The package is `@jmc-gtm/next-agent-twin` on npm (org `jmc-gtm`, free plan, public).
+
+1. Bump `version` in package.json and merge.
+2. Tag the merge commit `v<version>` and push the tag.
+3. `.github/workflows/release.yml` runs the checks and publishes through npm trusted publishing (GitHub OIDC), with provenance. No npm token exists in the repo, the vault or Actions secrets.
+
+The trusted publisher is set on npmjs.com → the package → Settings → Trusted publishing: GitHub Actions, repository `JMC-Go-to-market/next-agent-twin`, workflow `release.yml`, environment `npm`.

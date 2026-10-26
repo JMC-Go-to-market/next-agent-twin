@@ -1,6 +1,6 @@
 // Smoke test against a running build: node scripts/smoke.mjs <base-url> <index|suffix>
 import assert from "node:assert/strict";
-import { lintLlmsTxt } from "next-agent-twin";
+import { lintLlmsTxt } from "@jmc-gtm/next-agent-twin";
 
 const [base, style] = process.argv.slice(2);
 const SITE = "https://example.com";
