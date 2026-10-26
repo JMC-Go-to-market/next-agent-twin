@@ -1,0 +1,15 @@
+# Calls the org-wide issue-ref check (JMC-Go-to-market/.github). Installed by
+# scripts/sync-repo.mjs there; edit the shared check, not this file.
+name: issue-ref
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+jobs:
+  issue-ref:
+    uses: JMC-Go-to-market/.github/.github/workflows/issue-ref.yml@main
+    with:
+      enforce: false
