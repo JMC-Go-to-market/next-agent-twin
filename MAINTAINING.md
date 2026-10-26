@@ -22,6 +22,7 @@ The package is `@jmc-gtm/next-agent-twin` on npm (org `jmc-gtm`, free plan, publ
 
 1. Bump `version` in package.json and merge.
 2. Tag the merge commit `v<version>` and push the tag.
-3. `.github/workflows/release.yml` runs the checks and publishes through npm trusted publishing (GitHub OIDC), with provenance. No npm token exists in the repo, the vault or Actions secrets.
+3. `.github/workflows/release.yml` runs the checks and **stages** the release through npm trusted publishing (GitHub OIDC), with provenance. No npm token exists in the repo, the vault or Actions secrets.
+4. A maintainer approves the staged release on npmjs.com (the package → staged releases) or with `npm stage approve <stage-id>`, using 2FA. Nothing goes live without that step.
 
-The trusted publisher is set on npmjs.com → the package → Settings → Trusted publishing: GitHub Actions, repository `JMC-Go-to-market/next-agent-twin`, workflow `release.yml`, environment `npm`.
+The trusted publisher is set on npmjs.com → the package → Settings → Trusted publishing: GitHub Actions, repository `JMC-Go-to-market/next-agent-twin`, workflow `release.yml`, environment `npm`, allowed action: stage publish only (direct publish and dist-tag are off).

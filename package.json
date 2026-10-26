@@ -1,6 +1,6 @@
 {
   "name": "@jmc-gtm/next-agent-twin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Markdown agent twins for Next.js App Router pages: .md routes, Accept negotiation, rel=alternate, and llms.txt.",
   "license": "MIT",
   "type": "module",
