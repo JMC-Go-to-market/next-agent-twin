@@ -1,5 +1,5 @@
+import { twinProxy } from "@jmc-gtm/next-agent-twin/next";
 import type { NextRequest } from "next/server";
-import { twinProxy } from "next-agent-twin/next";
 import { twins } from "./lib/twins";
 
 export function proxy(request: NextRequest) {

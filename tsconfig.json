@@ -12,8 +12,8 @@
     "verbatimModuleSyntax": false,
     "types": ["node"],
     "paths": {
-      "next-agent-twin": ["./src/index.ts"],
-      "next-agent-twin/next": ["./src/next.ts"]
+      "@jmc-gtm/next-agent-twin": ["./src/index.ts"],
+      "@jmc-gtm/next-agent-twin/next": ["./src/next.ts"]
     }
   },
   "include": ["src", "test", "examples/**/*.ts", "vitest.config.ts"],

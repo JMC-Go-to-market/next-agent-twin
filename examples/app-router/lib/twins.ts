@@ -1,4 +1,4 @@
-import { defineTwins } from "next-agent-twin";
+import { defineTwins } from "@jmc-gtm/next-agent-twin";
 
 export const twins = defineTwins({
   site: "https://example.com",

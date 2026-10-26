@@ -1,4 +1,4 @@
-# next-agent-twin
+# @jmc-gtm/next-agent-twin
 
 Give every Next.js App Router page a Markdown **agent twin**, and generate `llms.txt`.
 
@@ -16,7 +16,7 @@ You supply the content. The package does not fetch data or convert HTML; each tw
 ## Install
 
 ```sh
-npm install next-agent-twin
+npm install @jmc-gtm/next-agent-twin
 ```
 
 Requires Next.js 16 or later (`next` is a peer dependency; the proxy adapter uses Next 16's `proxy.ts` convention). No runtime dependencies.
@@ -27,7 +27,7 @@ Requires Next.js 16 or later (`next` is a peer dependency; the proxy adapter use
 
 ```ts
 // lib/twins.ts
-import { defineTwins } from "next-agent-twin";
+import { defineTwins } from "@jmc-gtm/next-agent-twin";
 
 export const twins = defineTwins({
   site: "https://example.com",
@@ -90,7 +90,7 @@ Next replaces a layout's `alternates` wholesale when a page exports its own. Pas
 ```ts
 // proxy.ts
 import type { NextRequest } from "next/server";
-import { twinProxy } from "next-agent-twin/next";
+import { twinProxy } from "@jmc-gtm/next-agent-twin/next";
 import { twins } from "@/lib/twins";
 
 export function proxy(request: NextRequest) {
@@ -115,7 +115,7 @@ export const config = {
 
 ```ts
 // app/llms.txt/route.ts
-import { buildLlmsTxt } from "next-agent-twin";
+import { buildLlmsTxt } from "@jmc-gtm/next-agent-twin";
 import { twins } from "@/lib/twins";
 
 export const dynamic = "force-static";
@@ -169,13 +169,13 @@ Also exported:
 
 | Export | From | What it does |
 |---|---|---|
-| `defineTwins(config)` | `next-agent-twin` | Returns `pageUrl`, `twinPath`, `twinUrl`, `routePath`, `pagePathOf`, `response`, `alternates`, `document` bound to your site |
-| `wantsMarkdown(accept)` | `next-agent-twin` | True when an Accept header asks for `text/markdown` with q > 0 |
-| `appendVary(headers, ...values)` | `next-agent-twin` | Adds values to `Vary` without dropping or repeating existing ones |
-| `shiftHeadings(md)` | `next-agent-twin` | Moves Markdown headings one level down, skipping fenced code |
-| `buildLlmsTxt`, `buildLlmsFullTxt`, `linkifyLlmsBullets`, `lintLlmsTxt` | `next-agent-twin` | llms.txt helpers |
-| `twinProxy(twins, request, options?)` | `next-agent-twin/next` | Proxy negotiation and suffix rewrites |
-| `NEXT_ROUTER_VARY` | `next-agent-twin/next` | Next's App Router request headers for `Vary` |
+| `defineTwins(config)` | `@jmc-gtm/next-agent-twin` | Returns `pageUrl`, `twinPath`, `twinUrl`, `routePath`, `pagePathOf`, `response`, `alternates`, `document` bound to your site |
+| `wantsMarkdown(accept)` | `@jmc-gtm/next-agent-twin` | True when an Accept header asks for `text/markdown` with q > 0 |
+| `appendVary(headers, ...values)` | `@jmc-gtm/next-agent-twin` | Adds values to `Vary` without dropping or repeating existing ones |
+| `shiftHeadings(md)` | `@jmc-gtm/next-agent-twin` | Moves Markdown headings one level down, skipping fenced code |
+| `buildLlmsTxt`, `buildLlmsFullTxt`, `linkifyLlmsBullets`, `lintLlmsTxt` | `@jmc-gtm/next-agent-twin` | llms.txt helpers |
+| `twinProxy(twins, request, options?)` | `@jmc-gtm/next-agent-twin/next` | Proxy negotiation and suffix rewrites |
+| `NEXT_ROUTER_VARY` | `@jmc-gtm/next-agent-twin/next` | Next's App Router request headers for `Vary` |
 
 ## Example
 

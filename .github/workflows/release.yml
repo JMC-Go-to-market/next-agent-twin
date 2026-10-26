@@ -1,0 +1,34 @@
+# Publishes to npm when a v* tag is pushed, through npm trusted publishing (OIDC):
+# no npm token is stored anywhere. The trusted publisher (this repo + this file)
+# is configured on the package's npm settings page.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@11.6.2
+      - run: npm ci
+      - name: Tag matches package.json version
+        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+      - run: npm run secrets
+      - run: npm run check
+      - run: npm run build
+      - run: npm publish

@@ -13,7 +13,7 @@ npm pack --silent --pack-destination "$APP/.pack" >/dev/null
 
 cd "$APP"
 npm ci --no-audit --no-fund
-npm install --no-save --no-audit --no-fund ./.pack/next-agent-twin-*.tgz
+npm install --no-save --no-audit --no-fund ./.pack/jmc-gtm-next-agent-twin-*.tgz
 
 port="$BASE_PORT"
 for style in index suffix; do
